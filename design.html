@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-    
-     <meta charset="UTF-8">
-        <meta name="viewport" content="wdth=device-width", intialsacle="1.0">
-        <link rel="stylesheet" class="style.css">
-        <style>
-         p::before{
-         content:"@ ";
-         color:blue;
-         }
-         
-        </style>
-    </head>
-    <body>
-        <p>hello world</p>
-        <p>hello world</p>
-        <p>hello world</p>
-    </body>
-</html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+      <style>
+body{font-family:Arial;margin:30px}#box{max-width:400px;margin:auto}
+li{background:#eee;margin:5px;padding:8px;border-radius:5px}
+button{padding:8px 15px;margin:10px}  
+</style>
+      </head><body>
+    <div id="box">
+<h3>Students (10 per page)</h3><ul id="list"></ul>
+<button id="p">Prev</button><span id="info"></span><button id="n">Next</button>
+</div>
+    <script>
+let s=[...Array(120)].map((_,i)=>"Student "+(i+1)),pg=1,per=10;
+function load(){let L=document.getElementById("list");L.innerHTML="";
+let st=(pg-1)*per,en=st+per; s.slice(st,en).forEach(x=>L.innerHTML+=`<li>${x}</li>`);
+document.getElementById("info").innerHTML=" Page "+pg+" / "+Math.ceil(s.length/per);
+document.getElementById("p").disabled=pg==1;
+document.getElementById("n").disabled=pg==Math.ceil(s.length/per);}
+document.getElementById("p").onclick=()=>{pg--;load();}
+document.getElementById("n").onclick=()=>{pg++;load();}
+load();
+</script></body></html>
